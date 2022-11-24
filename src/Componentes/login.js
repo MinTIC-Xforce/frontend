@@ -1,10 +1,11 @@
 import { Fragment } from "react";
 import { useState } from "react";
-import { Navigate} from "react-router-dom";
+import { useNavigate, Navigate} from "react-router-dom";
 
 import '../Estilos/Login2.css';
 
 export function Login() {
+    const navigate = useNavigate();
 
     const [data, setDate] = useState({
         user: "",
@@ -56,8 +57,8 @@ export function Login() {
         console.log("Valor recibido :" + value)
         if ( value) {
             alert("El usuario ingresado es correcto")
-            return <Navigate to="/ListaProductosAdmin" replace={true} />
-             //navigate ("/ListaProductosAdmin")
+            //return <Navigate to="/ListaProductosAdmin" replace={true} />
+             return navigate ('ListaProductosAdmin')
         } else {
             alert("Por favor verifique los datos ingresados")
              }

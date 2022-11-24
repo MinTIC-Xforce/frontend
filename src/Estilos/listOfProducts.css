@@ -1,0 +1,20 @@
+.seccion-list-p{
+    background-color:#FFFFFF ;  
+    font-family: 'Poppins',sans-serif;
+    letter-spacing: 0.6px;
+
+}
+.cards{
+    background-color: #201A16 !important; 
+}
+
+.tranform-text{
+    font-family: 'Poppins',sans-serif;
+    text-transform: capitalize;
+    margin-top: 25px !important;
+}
+
+.subtitle-p2{
+    color: gray;
+    font-size: 80%;
+}

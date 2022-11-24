@@ -1,9 +1,8 @@
 import { Fragment } from "react";
 import { useState } from "react";
-import JsonData from "../data/UsuariosEjemplo.json";
+import { Navigate} from "react-router-dom";
 
 import '../Estilos/Login2.css';
-
 
 export function Login() {
 
@@ -12,8 +11,7 @@ export function Login() {
         pass: "",
         date: ""
     }
-    )
-
+    )    
 
     return (
 
@@ -24,7 +22,7 @@ export function Login() {
                 <div class="shape"></div>
             </div>
             <form>
-            <h3>--- Login App  ---</h3>
+            <h3>Login PANtasya App</h3>
 
             <label for="username">Username</label>
             <input type="text" placeholder="Email or Phone" id="username" onChange={(e) => {
@@ -40,7 +38,7 @@ export function Login() {
                         
                         }></input>
 
-            <button onClick={VerInfo}>Log In</button>
+            <button id="btn" onClick= {verInfo} >Log In</button>
             <div class="social">
                  <div class="go"><i class="fab fa-google"></i>  Google</div>
                  <div class="fb"><i class="fab fa-facebook"></i>  Facebook</div>
@@ -48,38 +46,47 @@ export function Login() {
             </form>
             </center>
         </Fragment>
-
-
-    );
-
-    function Validacion(usuarioNombre, contrasena) {
-
-        var decision = false;
-        var datos = JsonData; //Integra o con express o con mongoDb   
-
-
-        for (const usuario of datos) {            
-            if (usuarioNombre === usuario.user && contrasena === usuario.pass) {
-                decision = true;
-            } 
-        }
-        return decision;
-    }
-
+ );
     
-
-    function VerInfo() {
-
-        // eslint-disable-next-line eqeqeq
-
-        console.log(Validacion(data.user, data.pass))
-        if (Validacion(data.user, data.pass)) {
+ function verInfo() {
+    console.log(data.user, data.pass)
+    const loginResponse = getUser(data.user, data.pass)
+    alert("Validando datos")
+    loginResponse.then((value) => {
+        console.log("Valor recibido :" + value)
+        if ( value) {
             alert("El usuario ingresado es correcto")
+            return <Navigate to="/ListaProductosAdmin" replace={true} />
+             //navigate ("/ListaProductosAdmin")
         } else {
             alert("Por favor verifique los datos ingresados")
+             }
+    })
+}    
+
+   // getUser()
+    async function getUser(user, pass) {
+        try {
+          var decision = false;
+          const response = await fetch(`http://localhost:4000/user/${user}`,{method: 'GET',mode: 'cors', cache: 'no-cache',referrerPolicy: 'no-referrer', redirect: 'follow',headers: {
+            'Content-Type': 'application/json'
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+          },});
+          const result = await response.json();
+          console.log("JSON respuesta" + result)
+          //for (const usuario of result) {            
+            if (user === result.userName && pass === result.passwordUser) {
+                console.log("Desicion TRUE")
+                decision = true;
+            } 
+        //}
+        console.log(decision)   
+        return decision;
+
+
+        } catch (err) {
+          console.log(err);
         }
     }
+
 }
-
-
-

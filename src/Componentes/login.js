@@ -68,7 +68,7 @@ export function Login() {
     async function getUser(user, pass) {
         try {
           var decision = false;
-          const response = await fetch(`http://localhost:4000/user/${user}`,{method: 'GET',mode: 'cors', cache: 'no-cache',referrerPolicy: 'no-referrer', redirect: 'follow',headers: {
+          const response = await fetch(`https://pantasya-backend.herokuapp.com/user/${user}`,{method: 'GET',mode: 'cors', cache: 'no-cache',referrerPolicy: 'no-referrer', redirect: 'follow',headers: {
             'Content-Type': 'application/json'
             // 'Content-Type': 'application/x-www-form-urlencoded',
           },});

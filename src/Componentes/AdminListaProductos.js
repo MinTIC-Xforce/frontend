@@ -20,7 +20,7 @@ export const ListaProductosAdmin = () => {
         headers.append('Accept', 'application/json');
         headers.append('Origin','http://localhost:3000');
 
-        fetch("http://localhost:4000/products",{mode: 'cors', headers: headers})
+        fetch("https://pantasya-backend.herokuapp.com/products",{mode: 'cors', headers: headers})
             .then((resp) => resp.json())
             .then((resp) => {
                 return setDataProductos(resp)

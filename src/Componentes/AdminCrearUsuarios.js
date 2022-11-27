@@ -3,7 +3,9 @@ import { useState } from "react";
 
 
 
-import '../Estilos/Login.css';
+import '../Estilos/Login2.css';
+//import '../Estilos/ListaProductosAdmin.css';
+
 
 export function CrearUsuarios() {
 
@@ -23,50 +25,40 @@ export function CrearUsuarios() {
 
         <Fragment>
             <center>
-                <div id="divLogin">
+                <div className="container mt-4 text-white " align="center" id="divLogin">
                     <h3>Crear Usuarios</h3>
                     <label>Nombre
-                        <input type="User" onChange={(e) => {
+                        <input className="table table-bordered text-white " type="User" onChange={(e) => {
                             setDate({ ...data, name: e.target.value })
                         }
                         } ></input>
                     </label>
-                    <br></br>
-                    <br></br>
                     <label>Correo Electronico
-                        <input type="User" onChange={(e) => {
+                        <input className="table table-bordered text-white " type="User" onChange={(e) => {
                             setDate({ ...data, email: e.target.value })
                         }
                         } ></input>
                     </label>
-                    <br></br>
-                    <br></br>
                     <label>Rol
-                        <input type="User" onChange={(e) => {
+                        <input className="table table-bordered text-white " type="User" onChange={(e) => {
                             setDate({ ...data, rol: e.target.value })
                         }
                         } ></input>
                     </label>
-                    <br></br>
-                    <br></br>
                     <label>Usuario
-                        <input type="User" onChange={(e) => {
+                        <input className="table table-bordered text-white " type="User" onChange={(e) => {
                             setDate({ ...data, user: e.target.value })
                         }
                         } ></input>
                     </label>
-                    <br></br>
-                    <br></br>
                     <label>Contraseña
-                        <input type="Pass" onChange={(e) => {
+                        <input className="table table-bordered text-white " type="Pass" onChange={(e) => {
                             setDate({ ...data, pass: e.target.value })
                         }
                         }>
                         </input>
                     </label>
-                    <br></br>
-                    <br></br>
-                    <button onClick={CrearUsuario} >Crear Usuario</button>
+                    <button class="btn btn-secondary btn-sm" onClick={CrearUsuario} >Crear Usuario</button>
 
                 </div>
             </center>
@@ -76,6 +68,16 @@ export function CrearUsuarios() {
     );
 
     function CrearUsuario() {
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+
+        console.log(data)
+        fetch("https://pantasya-backend.herokuapp.com/products",{mode: 'cors', method: 'POST', cache: 'no-cache', headers: headers,
+            body: JSON.stringify(data) 
+             })
+        .then(function(res){ console.log(res) })
+        .catch(function(res){ console.log(res) })
+        return(alert("Producto Creado"),"/")
 
     }
 }

@@ -23,32 +23,29 @@ export const MenuNavegacion = ({ rol }) => {
                 <Link className="nav-link" to={"/"}>Login</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to={"/ListaProductosAdmin"}>Lista productos</Link>
+                <Link className="nav-link" to={"/CrearUsuarios"}>Crear Usuarios
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to={"/CrearProductos"}>Crear producto
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to={"/ListaProductosAdmin"}>Listar productos</Link>
               </li>
 
               <li className="nav-item">
-                <Link className="nav-link" to={"/CrearProductos"}>Crear Nuevos productos
+                <Link className="nav-link" to={"/ListaVentas"}>Listar ventas
                 </Link>
               </li>
-
-              <li className="nav-item">
-                <Link className="nav-link" to={"/ListaVentas"}>Lista de ventas
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to={"/CrearUsuarios"}>Crear CrearUsuarios
-                </Link>
-              </li>
+              
               <li className="nav-item">
                 <Link className="nav-link" to={"/CarritoCompras"}>Carrito
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link" to={"/ProductosPrueba"}> prueba productos
-                </Link>
-              </li>
+          
             </ul>
-          ) : (
+          ) :rol === "user" ?  (
             <ul className="navbar-nav">
               <li className="nav-item active">
                 <Link className="nav-link" to={"/"}>Login</Link>
@@ -61,6 +58,12 @@ export const MenuNavegacion = ({ rol }) => {
                 </Link>
               </li>
 
+            </ul>
+          ) : (
+            <ul className="navbar-nav">
+              <li className="nav-item active">
+                <Link className="nav-link" to={"/"}>Login</Link>
+              </li>
             </ul>
           )}
         </div>

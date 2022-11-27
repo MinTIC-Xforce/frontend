@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
-import '../Estilos/ListaProductosAdmin.css';
+
+import '../Estilos/Login2.css';
+//import '../Estilos/ListaProductosAdmin.css';
 
 
 export const ListaProductosAdmin = () => {
@@ -30,7 +32,7 @@ export const ListaProductosAdmin = () => {
 
     return (
 
-        <div className="container mt-5 text-white " align="center">
+        <div className="container mt-auto text-white " align="center">
             <h2> Lista de productos completos</h2>
 
             <table className="table table-bordered text-white " >
@@ -42,6 +44,7 @@ export const ListaProductosAdmin = () => {
                         <td>CANT INVENTARIO</td>
                         <td>VALOR UNITARIO </td>
                         <td>IMAGEN </td>
+                        <td>ACCION </td>
                     </tr>
                 </thead>
                 <tbody>
@@ -53,27 +56,13 @@ export const ListaProductosAdmin = () => {
                             <td>{Producto.stock}</td>
                             <td>{Producto.price}</td>
                             <td>{Producto.image}</td>
-                            <td> <button class="btn btn-secondary btn-sm" > MODIFICAR PRODUCTOS</button> </td>
+                            <td> <button class="btn btn-secondary btn-sm" align="center" > Eliminar</button> </td>
                         </tr>
                     ))}
 
                 </tbody>
             </table>
-
-
-
-
-
-
-
-
         </div>
-
-
-
     )
-
-
-
 
 }

@@ -1,0 +1,50 @@
+import { useState, createContext, useContext, useEffect } from "react";
+import { getProductsRequest, createProductRequest, deleteProductRequest } from "../api/product";
+
+export const productContext = createContext();
+
+export const useProducts = () => {
+  const context = useContext(productContext);
+  return context;
+};
+
+export const ProductProvideer = ({ children }) => {
+  const [products, setProducts] = useState([]);
+
+  const getProducts = async () => {
+    const res = await getProductsRequest();
+    setProducts(res.data);
+  };
+
+  const createProduct = async (product) => {
+    const res = await createProductRequest(product);
+    setProducts([...products, res.data]);
+  }
+
+  const deleteProduct = async (id) => {
+    const res = await deleteProductRequest(id);
+    console.log(res)
+
+    //if (res.status === 204) {
+      //setProducts(products.filter((product) => product._id !== id)); //el filter va a quitar un producto de arreglo
+    //}
+  };
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
+  return (
+    <productContext.Provider
+      value={{
+        products,
+        setProducts,
+        getProducts,
+        createProduct,
+        deleteProduct
+      }}
+    >
+      {children}
+    </productContext.Provider>
+  );
+};

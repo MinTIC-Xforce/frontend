@@ -1,71 +1,80 @@
-import { Component } from "react";
+import { useState, useEffect } from "react";
+import '../Estilos/ListaProductosAdmin.css';
 
 
-var heading = ['Id Producto', 'Nombre Producto', 'Descripcion Producto', 'Valor Unitario'];
 
-//var body = conexion a un BD NOsq o sql o un arcgivo plano
-
-var body =
-    [
-        ['PI-0001', 'Guantes', 'Unidades dependiendo de tallas', '36'],
-        ['PI-0002', 'Barrilla', 'TAmaños de 6 metros y define las pulagas', '40'],
-        ['PI-0003', 'Brea', 'Brea sintetica por 6 kg', '56'],
-
-    ];
+export const ListaVentas = () => {
+    
+    const [dataVentas, setDataVentas] = useState([]);
 
 
-export function ListaVentas() {
+    useEffect(() => {
+        getData();
+    }, [])
+    
+    
+
+
+    function getData() {
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Accept', 'application/json');
+        headers.append('Origin','http://localhost:3000');
+
+        fetch("https://pantasya-backend.herokuapp.com/sales",{mode: 'cors', headers: headers})
+            .then((resp) => resp.json())
+            .then((resp) => {
+                return setDataVentas(resp)
+            })
+            .catch((err) => console.log(err));
+    }
 
     return (
-        <>
-            <div align="center">
-                <br></br>
-                <h2 className="text-white" >ListaVentas</h2>
-                <div className="container mt-5 text-white " >
-                    <Table heading={heading} body={body} />
-                </div>
 
-            </div>
-        </>
-    );
+        <div className="container mt-5 text-white " align="center">
+            <h2> Lista de ventas completas</h2>
 
-}
-
-class Table extends Component {
-    render() {
-
-        //Vector y formatearlos para que react los conozca y los trate coomo un map
-        //Map Coleecion no lineal
-
-        var heading = this.props.heading;
-        var body = this.props.body;
-
-        return (
-            <div id="datagrid">
-                <table className="table table-bordered text-white " >
-                    <thead>
-                        <tr>
-                            {heading.map(head => <th>{head}</th>)}
+            <table className="table table-bordered text-white " >
+                <thead className="thead-dark text-white">
+                    <tr>
+                        <td>ID </td>
+                        <td>FECHA VENTA </td>
+                        <td>ID CLIENTE </td>
+                        <td>CANTIDAD </td>
+                        <td>VENTA CONFIRMADA </td>
+                        <td>DETALLE </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {dataVentas.map((Ventas) => (
+                        <tr key={Ventas.id}>
+                            <td>{Ventas.id}</td>
+                            <td>{Ventas.date}</td>
+                            <td>{Ventas.idClient}</td>
+                            <td>{Ventas.amount}</td>
+                            <td>{Ventas.confirm}</td>
+                            <td>{Ventas.detailSale.quantity}</td>
+                            
                         </tr>
-                    </thead>
-                    <tbody>
-                        {body.map(row => <TableRow row={row} />)}
-                    </tbody>
-                </table>
+                    ))}
+
+                </tbody>
+            </table>
 
 
-            </div>
-        );
-    }
-}
 
-class TableRow extends Component {
-    render() {
-        var row = this.props.row;
-        return (
-            <tr>
-                {row.map(val => <td>{val}</td>)}
-            </tr>
-        )
-    }
+
+
+
+
+
+        </div>
+
+
+
+    )
+
+
+
+
 }

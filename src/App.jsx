@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState } from "react";
 import { BrowserRouter } from "react-router-dom";
-
+import {getUser} from "./data/user.js"
 import { Navegacion } from "./Componentes/Navegacion.js";
 import { MenuNavegacion } from "./Componentes/NavMenu";
 
@@ -13,11 +13,8 @@ function App() {
     <>
     
       <BrowserRouter>
-      
-
         <MenuNavegacion rol={rol} />
         <Navegacion rol={rol} />
-
       </BrowserRouter>
 
       

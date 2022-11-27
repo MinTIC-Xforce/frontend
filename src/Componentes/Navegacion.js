@@ -7,6 +7,7 @@ import { CarritoCompras } from "./userCarrito.js";
 import { CrearUsuarios } from "./AdminCrearUsuarios.js";
 import { CrearProdcutos } from "./AdminCrearProductos.js";
 import { ListaProductosAdmin } from "./AdminListaProductos";
+//import { ListaProductosAdmin } from "../Componentes/productCards";
 import { ListaVentas } from "../Componentes/AdminListaVentas";
 import { ListaUsuarios } from "./AdminListaUsuarios.js";
 import { ShoppingCart} from "./shoppingCart";

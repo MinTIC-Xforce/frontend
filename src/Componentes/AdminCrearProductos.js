@@ -1,17 +1,18 @@
 import { Fragment } from "react";
 import { useState } from "react";
 
-import '../Estilos/Login.css';
+import '../Estilos/Login2.css';
 
 
 export function CrearProdcutos() {
 
     const [data, setDate] = useState({
-        ID: "",
-        Nombre: "",
-        Descripcion: "",
-        Valor: "",
-        Stock: ""
+        name: "",
+        description: "",
+        features: "",
+        price: "",
+        stock: "",
+        image: ""
 
 
     }
@@ -22,42 +23,45 @@ export function CrearProdcutos() {
 
         <Fragment>
             <center>
-                <div id="divProductos">
+                <div className="container mt-4 text-white " align="center" id="divProductos" >
                     <h3>Crear Productos</h3>
                     <label>Nombre
-                        <input type="User" onChange={(e) => {
-                            setDate({ ...data, Nombre: e.target.value })
+                        <input className="table table-bordered text-white " type="User" onChange={(e) => {
+                            setDate({ ...data, name: e.target.value })
                         }
                         } ></input>
                     </label>
-                    <br></br>
-                    <br></br>
                     <label>Descripcion
-                        <input type="User" onChange={(e) => {
-                            setDate({ ...data, Descripcion: e.target.value })
+                        <input className="table table-bordered text-white " type="User" onChange={(e) => {
+                            setDate({ ...data, description: e.target.value })
                         }
                         } ></input>
                     </label>
-                    <br></br>
-                    <br></br>
+                    <label>Features
+                        <input className="table table-bordered text-white " type="User" onChange={(e) => {
+                            setDate({ ...data, features: e.target.value })
+                        }
+                        } ></input>
+                    </label>
                     <label>Cantidad
-                        <input type="User" onChange={(e) => {
-                            setDate({ ...data, Stock: e.target.value })
+                        <input className="table table-bordered text-white " type="User" onChange={(e) => {
+                            setDate({ ...data, stock: e.target.value })
                         }
                         } ></input>
                     </label>
-                    <br></br>
-                    <br></br>
                     <label>Valor Unitario
-                        <input type="User" onChange={(e) => {
-                            setDate({ ...data, Valor: e.target.value })
+                        <input className="table table-bordered text-white " type="User" onChange={(e) => {
+                            setDate({ ...data, price: e.target.value })
                         }
                         } ></input>
                     </label>
-                    <br></br>
-                    <br></br>
-                    
-                    <button onClick={CrearUsuario} >Crear Stock</button>
+                    <label>Imagen
+                        <input className="table table-bordered text-white " type="User" onChange={(e) => {
+                            setDate({ ...data, image: e.target.value })
+                        }
+                        } ></input>
+                    </label>                    
+                    <button class="btn btn-secondary btn-sm" onClick={CrearUsuario} >Crear Producto</button>
 
                 </div>
             </center>
@@ -68,5 +72,15 @@ export function CrearProdcutos() {
 
     function CrearUsuario() {
 
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+
+        console.log(data)
+        fetch("https://pantasya-backend.herokuapp.com/products",{mode: 'cors', method: 'POST', cache: 'no-cache', headers: headers,
+            body: JSON.stringify(data) 
+             })
+        .then(function(res){ console.log(res) })
+        .catch(function(res){ console.log(res) })
+        return(alert("Producto Creado"),"/")
     }
 }

@@ -1,11 +1,16 @@
 import { Fragment } from "react";
 import { useState } from "react";
+import React from "react";
 import { useNavigate, Navigate} from "react-router-dom";
+import { MenuNavegacion } from "./NavMenu";
+import { BrowserRouter } from "react-router-dom";
+import { Navegacion } from "./Navegacion.js";
 
 import '../Estilos/Login2.css';
 
 export function Login() {
     const navigate = useNavigate();
+    var rolUser = ""
 
     const [data, setDate] = useState({
         user: "",
@@ -13,6 +18,9 @@ export function Login() {
         date: ""
     }
     )    
+
+    const [url, setURL] = useState("")
+    const [rol, setRol] = useState('')
 
     return (
 
@@ -58,7 +66,9 @@ export function Login() {
         if ( value) {
             alert("El usuario ingresado es correcto")
             //return <Navigate to="/ListaProductosAdmin" replace={true} />
-             return navigate ('ListaProductosAdmin')
+            //navigate ('/ListaProductosAdmin')
+            setRol(rolUser)
+            setURL("/ListaProductos")
         } else {
             alert("Por favor verifique los datos ingresados")
              }
@@ -78,6 +88,9 @@ export function Login() {
           //for (const usuario of result) {            
             if (user === result.userName && pass === result.passwordUser) {
                 console.log("Desicion TRUE")
+                rolUser = result.rolUser
+                console.log("Rol user :" + rolUser)
+
                 decision = true;
             } 
         //}
